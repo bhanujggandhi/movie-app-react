@@ -3,14 +3,15 @@ import { API_URL, API_KEY, IMAGE_URL } from "../../Config";
 import MainImage from "../LandingPage/Sections/MainImage";
 import { Button, Descriptions, Row } from "antd";
 import GridCard from "../LandingPage/Sections/GridCard";
+import Favorite from "./Sections/Favorite";
 
 function MovieDetailPage(props) {
   const [Movie, setMovie] = useState([]);
   const [Crews, setCrews] = useState([]);
   const [ActorToggle, setActorToggle] = useState(false);
+  const movieId = props.match.params.movieId;
 
   useEffect(() => {
-    const movieId = props.match.params.movieId;
     const endPoint = `${API_URL}movie/${movieId}?api_key=${API_KEY}&language=en-US`;
 
     fetch(endPoint)
@@ -46,8 +47,12 @@ function MovieDetailPage(props) {
       {/* Movie Body */}
 
       <div style={{ width: "85%", margin: "1rem auto" }}>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <Button>Add to Favorite</Button>
+        <div style={{ display: "flex", justifyContent: "felx-end" }}>
+          <Favorite
+            userFrom={localStorage.getItem("userId")}
+            movieId={movieId}
+            movieInfo={Movie}
+          />
         </div>
 
         {/* Movie table */}
@@ -55,19 +60,19 @@ function MovieDetailPage(props) {
           <Descriptions.Item label="Title">
             {Movie.original_title}
           </Descriptions.Item>
-          <Descriptions.Item label="release_date">
+          <Descriptions.Item label="Released on">
             {Movie.release_date}
           </Descriptions.Item>
-          <Descriptions.Item label="revenue">{Movie.revenue}</Descriptions.Item>
-          <Descriptions.Item label="runtime">{Movie.runtime}</Descriptions.Item>
-          <Descriptions.Item label="vote_average" span={2}>
+          <Descriptions.Item label="Revenue">{Movie.revenue}</Descriptions.Item>
+          <Descriptions.Item label="Runtime">{Movie.runtime}</Descriptions.Item>
+          <Descriptions.Item label="Vote Average" span={2}>
             {Movie.vote_average}
           </Descriptions.Item>
-          <Descriptions.Item label="vote_count">
+          <Descriptions.Item label="Vote Count">
             {Movie.vote_count}
           </Descriptions.Item>
-          <Descriptions.Item label="status">{Movie.status}</Descriptions.Item>
-          <Descriptions.Item label="popularity">
+          <Descriptions.Item label="Status">{Movie.status}</Descriptions.Item>
+          <Descriptions.Item label="Popularity">
             {Movie.popularity}
           </Descriptions.Item>
         </Descriptions>
