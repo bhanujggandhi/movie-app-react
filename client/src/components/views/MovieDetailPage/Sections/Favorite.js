@@ -69,7 +69,7 @@ function Favorite(props) {
         alert("Failed to get Favorite Information");
       }
     });
-  }, []);
+  });
 
   return (
     <Button onClick={onClickFavorite}>
