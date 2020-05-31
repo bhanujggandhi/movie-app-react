@@ -54,7 +54,7 @@ router.post("/removeFromFavorite", (req, res) => {
   });
 });
 
-router.post("/getFavoredMovie", (req, res) => {
+router.post("/getFavoritedMovie", (req, res) => {
   //Need to find all of the Users that I am subscribing to From Subscriber Collection
   Favorite.find({ userFrom: req.body.userFrom }).exec((err, favorites) => {
     if (err) return res.status(400).send(err);
